@@ -29,15 +29,15 @@ to customise LDAP:
 For example:
 
 ```
-docker run -d -p 389:389 \
-  --name openldap
+sudo docker run -d -p 389:389 \
+  --name openldap \
   -e ORGANISATION_NAME="Example Ltd" \
   -e SUFFIX="dc=example,dc=com" \
   -e ROOT_PW="password" \
   -e USER_UID="test" \
   -e USER_GIVEN_NAME="test" \
   -e USER_SURNAME="测试" \
-  -e USER_EMAIL="test@example.com" \ 
+  -e USER_EMAIL="test@example.com" \
   registry.cn-shenzhen.aliyuncs.com/dev-ops/ldap-alpine
 ```
 
