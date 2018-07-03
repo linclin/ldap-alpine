@@ -29,17 +29,22 @@ to customise LDAP:
 For example:
 
 ```
-docker run -t -p 389:389 \
-  -e ORGANISATION_NAME="Beispiel gmbh" \
-  -e SUFFIX="dc=beispiel,dc=de" \
-  -e ROOT_PW="geheimnis" \
-  pgarrett/ldap-alpine
+docker run -d -p 389:389 \
+  --name openldap
+  -e ORGANISATION_NAME="Example Ltd" \
+  -e SUFFIX="dc=example,dc=com" \
+  -e ROOT_PW="password" \
+  -e USER_UID="test" \
+  -e USER_GIVEN_NAME="test" \
+  -e USER_SURNAME="测试" \
+  -e USER_EMAIL="test@example.com" \ 
+  registry.cn-shenzhen.aliyuncs.com/dev-ops/ldap-alpine
 ```
 
 Search for user:
 
 ```
-ldapsearch -x -b "dc=beispiel,dc=de" "uid=pgarrett"
+sudo docker exec openldap  ldapsearch -x -H ldap://localhost -b dc=example,dc=com -D "cn=admin,dc=example,dc=com" -w password
 ```
 
 ## Logging Levels
@@ -78,7 +83,7 @@ COPY my-users.ldif /ldif/
 Or by mounting your scripts directory into the container:
 
 ```
-docker run -t -p 389:389 -v /my-ldif:/ldif pgarrett/ldap-alpine
+docker run --name openldap -t -p 389:389 -v /my-ldif:/ldif registry.cn-shenzhen.aliyuncs.com/dev-ops/ldap-alpine
 ```
 
 ## Persist data
@@ -87,7 +92,7 @@ The container uses a standard mdb backend. To persist this database outside the
 container mount `/var/lib/openldap/openldap-data`. For example:
 
 ```
-docker run -t -p 389:389 -v /my-backup:/var/lib/openldap/openldap-data pgarrett/ldap-alpine
+docker run -t --name openldap -p 389:389 -v /my-backup:/var/lib/openldap/openldap-data registry.cn-shenzhen.aliyuncs.com/dev-ops/ldap-alpine
 ```
 
 ## Transport Layer Security
@@ -107,12 +112,12 @@ to find the SSL certificates inside the container. So the certificates must
 also be mounted at runtime too, for example:
 
 ```
-docker run -t -p 389:389 \
+docker run --name openldap -t -p 389:389 \
   -v /my-certs:/etc/ssl/certs \
   -e CA_FILE /etc/ssl/certs/ca.pem \
   -e KEY_FILE /etc/ssl/certs/public.key \
   -e CERT_FILE /etc/ssl/certs/public.crt \
-  pgarrett/ldap-alpine
+  registry.cn-shenzhen.aliyuncs.com/dev-ops/ldap-alpine
 ```
 
 Where `/my-certs` on the host contains the three certificate files `ca.pem`,
@@ -138,9 +143,9 @@ This following access control allows the user to modify their entry, allows anon
 and allows all others to read these entries:
 
 ```
-docker run -t -p 389:389 \
+docker run --name openldap -t -p 389:389 \
   -e ACCESS_CONTROL="access to * by self write by anonymous auth by users read" \
-  pgarrett/ldap-alpine
+  registry.cn-shenzhen.aliyuncs.com/dev-ops/ldap-alpine
 ```
 
 Now `ldapsearch -x -b "dc=example,dc=com" "uid=pgarret"` will return no results.
