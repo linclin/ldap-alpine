@@ -57,8 +57,8 @@ sudo docker exec openldap  ldapsearch -x -H ldap://localhost -b dc=example,dc=co
 Add objectclass:
 
 ```
-sudo docker exec openldap   ldapadd -Y EXTERNAL -H ldapi:/// -D "cn=config" -f /etc/openldap/ext-users.ldif
-sudo docker exec openldap   ldapadd -Y EXTERNAL -H ldapi:/// -D "cn=config" -f /etc/openldap/ext-group.ldif
+sudo docker exec openldap   ldapadd -Y EXTERNAL -H ldap://localhost -D "cn=config" -f /etc/openldap/ext-users.ldif
+sudo docker exec openldap   ldapadd -Y EXTERNAL -H ldap://localhost -D "cn=config" -f /etc/openldap/ext-group.ldif
 ```
 ## Logging Levels
 
