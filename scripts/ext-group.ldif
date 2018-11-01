@@ -1,0 +1,22 @@
+# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.
+# CRC32 f07cedc0
+dn: cn=extgroups,cn=schema,cn=config
+objectClass: olcSchemaConfig
+cn: extgroups
+olcAttributeTypes: {0}( 1.3.6.1.4.2.44006.666.1.1 NAME 'groupId' DESC 'groupId' 
+  EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX
+  1.3.6.1.4.1.1466.115.121.1.15{256} SINGLE-VALUE)
+olcAttributeTypes: {1}( 1.3.6.1.4.2.44006.666.1.2 NAME 'groupParentId' DESC 'groupParentId'
+  EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4
+ .1.1466.115.121.1.15{16} SINGLE-VALUE )
+olcAttributeTypes: {2}( 1.3.6.1.4.2.44006.666.1.3 NAME 'groupOrder' DESC 'groupOrder' 
+  EQUALITY booleanMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.7 SINGLE
+ -VALUE )
+olcAttributeTypes: {3}( 1.3.6.1.4.2.44006.666.1.4 NAME 'groupDeptManagerUseridList' DESC 'groupDeptManagerUseridList'
+  EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNT
+ AX 1.3.6.1.4.1.1466.115.121.1.15{256}   )
+olcAttributeTypes: {4}( 1.3.6.1.4.2.44006.666.1.5 NAME 'groupSource' DESC 'groupSource' 
+  EQUALITY caseIgnoreMatch SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3
+ .6.1.4.1.1466.115.121.1.15{16} )
+olcObjectClasses: {0}( 1.3.6.1.4.1.44006.666.2.1 NAME 'ExtGroup' DESC 'Ext 
+ Group Attribute' SUP inetOrgPerson STRUCTURAL MUST cn MAY ( groupId $ groupParentId $ groupOrder $ groupDeptManagerUseridList $ groupSource ) )

@@ -54,6 +54,12 @@ Search for user:
 sudo docker exec openldap  ldapsearch -x -H ldap://localhost -b dc=example,dc=com -D "cn=admin,dc=example,dc=com" -w password
 ```
 
+Add objectclass:
+
+```
+sudo docker exec openldap   ldapadd -Y EXTERNAL -H ldapi:/// -D "cn=config" -f /etc/openldap/ext-users.ldif
+sudo docker exec openldap   ldapadd -Y EXTERNAL -H ldapi:/// -D "cn=config" -f /etc/openldap/ext-group.ldif
+```
 ## Logging Levels
 
 | NAME | DESCRIPTION |
