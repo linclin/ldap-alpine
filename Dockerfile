@@ -13,7 +13,7 @@ ENV LOG_LEVEL "stats"
 
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories && \
     apk update && \
-    apk add --update openldap openldap-back-mdb openldap-clients   bash tzdata ca-certificates   sudo && \
+    apk add --update openldap openldap-back-mdb openldap-clients openldap-back-monitor   bash tzdata ca-certificates   sudo && \
     mkdir -p /run/openldap /var/lib/openldap/openldap-data && \
     echo "Asia/Shanghai" > /etc/timezone && \
     cp -r -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \

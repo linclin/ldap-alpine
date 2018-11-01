@@ -5,4 +5,5 @@ sn: %USER_SURNAME%
 uid: %USER_UID%
 userpassword: %USER_PW%
 mail: %USER_EMAIL%
+mobile: %USER_EMAIL%
 ou: Users

@@ -31,7 +31,8 @@ For example:
 ```
 sudo docker build  --network=host --no-cache -t  registry.cn-shenzhen.aliyuncs.com/dev-ops/ldap-alpine .
 sudo docker push registry.cn-shenzhen.aliyuncs.com/dev-ops/ldap-alpine
-sudo docker run -d -p 389:389 \
+sudo docker run -d --restart=always\
+  --network=host  \
   --name openldap \
   -e ORGANISATION_NAME="Example Ltd" \
   -e SUFFIX="dc=example,dc=com" \
@@ -40,7 +41,11 @@ sudo docker run -d -p 389:389 \
   -e USER_GIVEN_NAME="test" \
   -e USER_SURNAME="测试" \
   -e USER_EMAIL="test@example.com" \
+  -v /data/openldap/openldap-data:/var/lib/openldap/openldap-data \
   registry.cn-shenzhen.aliyuncs.com/dev-ops/ldap-alpine
+
+
+  docker run  --name phpldapadmin --restart=always -p 6443:443 -p 8081:80   --env PHPLDAPADMIN_LDAP_HOSTS=10.10.133.11  --env PHPLDAPADMIN_HTTPS=false  --detach osixia/phpldapadmin:0.7.2
 ```
 
 Search for user:
