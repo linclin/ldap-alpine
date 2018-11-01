@@ -29,6 +29,8 @@ to customise LDAP:
 For example:
 
 ```
+sudo docker build  --network=host --no-cache -t  registry.cn-shenzhen.aliyuncs.com/dev-ops/ldap-alpine .
+sudo docker push registry.cn-shenzhen.aliyuncs.com/dev-ops/ldap-alpine
 sudo docker run -d -p 389:389 \
   --name openldap \
   -e ORGANISATION_NAME="Example Ltd" \
