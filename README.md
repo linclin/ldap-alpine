@@ -41,11 +41,12 @@ sudo docker run -d --restart=always\
   -e USER_GIVEN_NAME="test" \
   -e USER_SURNAME="测试" \
   -e USER_EMAIL="test@example.com" \
+  -v /etc/localtime:/etc/localtime \
   -v /data/openldap/openldap-data:/var/lib/openldap/openldap-data \
   registry.cn-shenzhen.aliyuncs.com/dev-ops/ldap-alpine
 
 
-  docker run  --name phpldapadmin --restart=always -p 6443:443 -p 8081:80   --env PHPLDAPADMIN_LDAP_HOSTS=10.10.133.11  --env PHPLDAPADMIN_HTTPS=false  --detach osixia/phpldapadmin:0.7.2
+  docker run  --name phpldapadmin --restart=always -p 6443:443 -p 8081:80 -v /etc/localtime:/etc/localtime  --env PHPLDAPADMIN_LDAP_HOSTS=10.10.133.11  --env PHPLDAPADMIN_HTTPS=false  --detach osixia/phpldapadmin:0.7.2
 ```
 
 Search for user:
